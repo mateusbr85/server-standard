@@ -1,0 +1,46 @@
+{
+    "compilerOptions": {
+      "target": "es2019",
+      "moduleResolution": "node",
+      "module": "commonjs",
+      "lib": ["es2019"],
+      "sourceMap": true,
+      "outDir": "dist",
+      "strict": true,
+      // "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "noImplicitThis": true,
+      "resolveJsonModule": true,
+      "alwaysStrict": true,
+      "removeComments": true,
+      "noImplicitReturns": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": ".",
+      "paths": {
+        "@src/*": ["./src/*"],
+        "@database/*": ["./src/database/*"],
+        "@models/*": ["./src/database/models/*"],
+        "@controllers/*": ["./src/app/http/controllers/*"],
+        "@api/*": ["./src/http/controllers/api/*"],
+        "@plugins/*": ["./src/plugins/*"],
+        "@http/*": ["./src/app/http/*"]
+      },
+      "rootDirs": [
+        "./src",
+        "./bootstrap",
+        "./database",
+      ],
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
+    },
+    "include": [
+      "./src/**/*.ts",
+      "./bootstrap/**/*.ts",
+    ],
+    "exclude": [
+      "./node_modules/*",
+      "dist"
+    ]
+  }
