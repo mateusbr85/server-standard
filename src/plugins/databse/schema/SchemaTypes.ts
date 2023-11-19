@@ -22,6 +22,8 @@ export interface ISchema {
     type: keyof typeFieldOptions;
     width: number;
     order: number;
+    min?: number;
+    max?: number;
     browserColumn: boolean;
     api?: string;
     grid?: ISchema;

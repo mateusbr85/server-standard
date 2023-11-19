@@ -11,7 +11,6 @@ export class ValidationSchema {
             const { crud } = req.params;
             const { data } = req.body;
             const instancedClass = await IsInstancedModel.instanced(crud);
-            const instancedSchema = await IsInstancedSchema.instanced(crud)
             let isValidatePass = true;
             if (instancedClass['onValidate'] && typeof instancedClass['onValidate'] == 'function') {
                 await instancedClass['onValidate'](data).then((responseModel) => {

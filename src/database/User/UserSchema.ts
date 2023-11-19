@@ -28,6 +28,8 @@ const UserSchema = {
                 browserColumn: false,
                 order: 3,
                 width: 2,
+                min:6,
+                max: 8,
                 required: true,
                 label: 'Senha'
             },
