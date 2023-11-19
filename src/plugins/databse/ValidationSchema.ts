@@ -41,8 +41,6 @@ export class ValidationSchema {
                 }
                 return true;
             }
-            console.log('teste',isJson(e.message));
-            console.log(e.message)
             res.status(e.httpCode !== undefined ? e.httpCode : 404).json({ title: e.name, error: isJson(e.message), location: e.stack });
         }
     }

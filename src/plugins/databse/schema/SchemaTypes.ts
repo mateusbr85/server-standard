@@ -3,8 +3,23 @@ export interface ISelectOptions {
     [key: number]: string | number;
 }
 
+export interface typeFieldOptions {
+    text: 'text';
+    string: 'string';
+    checkbox: 'checkbox';
+    number: 'number';
+    grid: 'grid';
+    multifiles: 'multifile';
+    select: 'select';
+    richTextBox: 'richTextBox';
+    email: 'email';
+    date: 'date';
+    password: 'password';
+    // Adicione outras opções aqui
+}
+
 export interface ISchema {
-    type: "text" | "string" | "checkbox" | "number" | "grid" | "multiFiles" | "select" | "textarea" | "email" | "date" | "password" | "checkbox";
+    type: keyof typeFieldOptions;
     width: number;
     order: number;
     browserColumn: boolean;
