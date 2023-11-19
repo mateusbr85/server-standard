@@ -29,7 +29,7 @@ export class ValidationSchema {
                 // })
                 await LumaValidSchema.validate(crud,data)
             }
-            throw new Error('aaa')
+            // throw new Error('aaa')
             return next()
         } catch (e: any) {
             // Se ocorrer um erro durante a validação, você pode tratá-lo aqui

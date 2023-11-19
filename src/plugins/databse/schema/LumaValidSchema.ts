@@ -3,6 +3,15 @@ import { ISchema,typeFieldOptions } from "./SchemaTypes";
 import { ErrorsCustom } from '@plugins/express/ErrorCustom';
 // import lodash from "lodash";
 
+
+export type errorValidator = {
+    field: string,
+    code: string,
+    received: string,
+    expected: keyof typeFieldOptions,
+    message: string
+}[]
+
 export class LumaValidSchema {
     private static verifyIfOthersColumns (
         ArrayFieldsValue: any,
@@ -16,8 +25,6 @@ export class LumaValidSchema {
         }
         return result;
     }
-
-
     static async validate (
         crud: string,
         ArrayFieldsValue: ISchema
@@ -27,13 +34,7 @@ export class LumaValidSchema {
         //         error: string
         //     }
         // } = {};
-        const errors: {
-            field: string,
-            code: string,
-            received: string,
-            expected: keyof typeFieldOptions,
-            message: string
-        }[] = []
+        const errors: errorValidator = []
         const instancedSchema = await IsInstancedSchema.instanced(crud).then((response) => {
             return response.$GLOBALS.fields
         })
@@ -47,13 +48,10 @@ export class LumaValidSchema {
             }
             if(columnsVerifyOther[column]) {
                 const valueColumns: any = columnsVerifyOther[column]
-                const isInvalid = false;
-                const errorsPush = [];
                 switch (instancedSchema[column].type) {
                     case 'text':
                         if(typeof valueColumns === 'string') {
                             if(valueColumns?.includes('<script')) {
-                                // errorsPush.push(`Não é aceito SQL injection em nenhum campo`)
                                 errors.push({
                                     field: column,
                                     code: 'Tipo Invalido',
@@ -79,12 +77,23 @@ export class LumaValidSchema {
                         }
                         errors.push({
                             field: column,
-                            code: 'Tipo precisa ser Booleano',
+                            code: 'Tipo Invalido',
                             received: typeof valueColumns,
                             expected: instancedSchema[column].type,
-                            message: 'Tipo precisa ser String'
+                            message: 'Tipo precisa ser Booleano'
                         })
                     break;
+                    case 'select':
+                        if(typeof valueColumns === 'number') {
+                            continue;
+                        }
+                        errors.push({
+                            field: column,
+                            code: 'Tipo Invalido',
+                            received: typeof valueColumns,
+                            expected: instancedSchema[column].type,
+                            message: 'Tipo precisa ser Number'
+                        })
                 }
 
                 // if(isInvalid) {
