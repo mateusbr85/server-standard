@@ -45,6 +45,8 @@ export interface IsSchemaSelect extends ISchema {
 
 export interface IGlobals {
     $GLOBALS: {
+        table: string;
+        prefix: string;
         icon_name: string,
         plural_name: string,
         singular_name: string;

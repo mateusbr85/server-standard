@@ -2,6 +2,8 @@ import { IGlobals } from "@plugins/databse/schema/SchemaTypes"
 
 const UserSchema = {
     $GLOBALS: {
+        table: 'users',
+        prefix: 'user',
         icon_name: 'fa fa-folder',
         plural_name: 'Usuarios',
         singular_name: 'Usuario',
