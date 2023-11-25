@@ -55,7 +55,7 @@ export class IsInstancedSchema {
         }
     }
 
-    static async instacedSchemaType(crudName: string): Promise<ZodObject<any>> {
+    static async instacedSchemaType(crudName: string):Promise<IGlobals> {
         const instancedName = _.startCase(
             _.camelCase(
                 pluralize.singular(

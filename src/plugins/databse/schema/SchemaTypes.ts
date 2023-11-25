@@ -1,6 +1,6 @@
 export interface ISelectOptions {
-    [key: string]: string | number;
-    [key: number]: string | number;
+    value: number,
+    label: string
 }
 
 export interface typeFieldOptions {
@@ -28,9 +28,10 @@ export interface ISchema {
     api?: string;
     grid?: ISchema;
     mask?: string | string[];
-    options?: Array<string> | ISelectOptions;
+    options?: Array<ISelectOptions>;
     default?: string | number;
     label?: string;
+    displayLabel?: string;
     placeholder?: string;
     readonly?: boolean;
     required?: boolean;

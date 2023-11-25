@@ -4,6 +4,8 @@ import { Response, Request } from "express";
 import { ErrorsCustom } from '@plugins/express/ErrorCustom'
 import { IsInstancedSchema } from '@plugins/databse/IsInstancedSchema'
 import pluralize from "pluralize";
+import { GetFkKnes } from '@plugins/knex/GetFkKnex'
+import { IGlobals } from "@plugins/databse/schema/SchemaTypes"
 
 export class CrudController {
     static async get(req: Request, res: Response) {
@@ -16,7 +18,7 @@ export class CrudController {
 
     static async list(req: Request, res: Response) {
             const {crud} = req.params;
-            const schema: any = await IsInstancedSchema.instacedSchemaType(crud).then((res) => {
+            const schema = await IsInstancedSchema.instacedSchemaType(crud).then((res) => {
                 return res;
             }).catch((err) => {
                 throw new ErrorsCustom(err.name, err.message, 422)
@@ -45,7 +47,12 @@ export class CrudController {
             let totalPages: any = (await queryTotal.count().first().catch((err) => {
                 throw new ErrorsCustom(err.name, err.message, 422)
             }))?.count ?? 1;
-            const registros: any = await query.catch((err) => {
+            const registros: any = await query.orderBy(`${pluralize.singular(crud)}_id`,'desc').then(async(response) => {
+                if(response !== undefined) {
+                    return await GetFkKnes.get(response,schema)
+                }
+                return response
+            }).catch((err) => {
                 throw new ErrorsCustom(err.name, err.message, 422)
             });
             const totalItems: number = parseInt(totalPages);
