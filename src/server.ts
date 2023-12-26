@@ -2,10 +2,12 @@ import cluster from "node:cluster";
 import { cpus } from "node:os";
 import doteEnvConfig from "./config/doteEnv";
 import app from "./app";
+import swaggerDocs from '@src/plugins/swagger/swagger';
 doteEnvConfig;
 
 if (cluster.isPrimary) {
   console.log(`Server started primary process: ${process.pid}`);
+  
   const CPUS = 3
 
   for(let i = 0; i < CPUS; i++){

@@ -1,0 +1,25 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api Restfull",
+        "description": "Documentação de uma Api padrão",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Api Suport",
+            "email": "mvdev@gmail.com"
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "basePath": "/api/v1/",
+    "paths": {
+        
+    }
+}
